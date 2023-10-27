@@ -1,46 +1,46 @@
 import React, { useState, useEffect } from "react";
-import "./Products.css"
+import "./Products.css";
 
+const url = "https://deca-api-server-c2ce4a810fea.herokuapp.com/articles";
 
-const url = "http://localhost:9999/products"
+function Products() {
+  const [productData, setProductData] = useState({ products: [] });
 
-function Products(){
-    const [productData, setProductData] = useState({products: [] });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("We couldnt load JSON file.");
+        }
+        const data = await response.json();
+        setProductData({ products: data });
+      } catch (error) {
+        console.error("Failed to charge the JSON file.", error);
+      }
+    };
+    fetchData();
+  }, []);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try{
-                const response = await fetch(url);
-                if (!response.ok) {
-
-                    throw new Error("We couldnt load JSON file.");
-                }
-                const data = await response.json();
-                setProductData({products:data});
-            } catch (error) {
-                console.error("Failed to charge the JSON file.", error);
-            }
-        };
-        fetchData();
-    },[]);
-
-    return (
-        <div>
-            <div key={"products"}>
-                <h2>Top Ventas</h2>
-                <div class="container">
-                    {productData.products.map((product, index) =>(
-                        <div class="card" key={index}>
-                            <img class="imageProduct" src={product.imagen}/>
-                            <p id="precio">{product.precio}€</p>
-                            <p id="description">{product.nombre}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
-    )
+  return (
+    <div>
+      <div key={"products"}>
+        <h2>Top Ventas</h2>
+        <ul className="carousel">
+          {productData.products.slice(0,4).map((product, index) => (
+            <li class="card" key={index}>
+              <div className="cardContent">
+                <img class="imageItem" src={product.poster_img} />
+                <p className="price">{product.price}€</p>
+                <p className="brand">{product.brand}</p>
+                <p className="name">{product.name}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 }
-    
 
 export default Products;
