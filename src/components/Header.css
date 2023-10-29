@@ -2,6 +2,35 @@ header{
     display: flex;
     justify-content: start;
     align-items: center;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin: 0 0 60px 0;
+    border: 1px solid black;
+    height: 120px;
+    position:relative;
+    
 }
+
+
+.inputHeader{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 500px;
+    height: 50px;
+    border: 1px solid black;
+    position: absolute;
+    top: 25px;
+    left: 20%;
+    border-radius: 6px;
+}
+
+.navigatorBar{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    gap: 20px;
+    border: 1px  solid black;
+    position: absolute;
+    top: 80px; 
+   
+}
+
